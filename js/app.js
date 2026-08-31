@@ -34,7 +34,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 11. Smooth Scroll Observers
     initScrollAnimations();
+
+    // 12. Romantic Landing Entrance Handler
+    initLandingEntrance(audio, particles);
 });
+
+/**
+ * Romantic Landing Entrance Curtain Handler
+ */
+function initLandingEntrance(audio, particles) {
+    const curtain = document.getElementById('romanticLandingCurtain');
+    const enterBtn = document.getElementById('landingEnterBtn');
+    const sealBadge = document.getElementById('landingSealBadge');
+
+    if (!curtain) return;
+
+    const openCurtain = () => {
+        // Start romantic music from 0:48s
+        if (audio) {
+            audio.start();
+        }
+
+        // Open the curtain
+        curtain.classList.add('opened');
+
+        // Trigger gentle heart particles
+        if (particles) {
+            for (let i = 0; i < 30; i++) {
+                particles.createConfetti();
+            }
+        }
+    };
+
+    if (enterBtn) enterBtn.addEventListener('click', openCurtain);
+    if (sealBadge) sealBadge.addEventListener('click', openCurtain);
+}
 
 /**
  * Live Relationship Counter
