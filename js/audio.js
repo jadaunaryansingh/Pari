@@ -1,6 +1,6 @@
 /**
- * Romantic Audio Engine & Synthesizer
- * Provides atmospheric background melody and realistic interactive sound effects
+ * Romantic Audio Engine & Music Manager
+ * Plays background song starting precisely from 0:48 seconds with instant autoplay handling
  */
 class RomanticAudioEngine {
     constructor() {
@@ -9,25 +9,64 @@ class RomanticAudioEngine {
         this.customAudio = null;
         this.synthTimer = null;
         this.noteIndex = 0;
+        this.startTime = CONFIG?.audio?.startTimeSeconds || 48;
         
-        // Romantic chord progression (Piano / Bell arpeggios in Hz)
-        // Cmaj - Gmaj - Amin - Fmaj progression
+        // Romantic synth chord progression fallback
         this.melody = [
-            // C chord
             261.63, 329.63, 392.00, 523.25, 392.00, 329.63,
-            // G chord
             246.94, 293.66, 392.00, 493.88, 392.00, 293.66,
-            // Am chord
             220.00, 261.63, 329.63, 440.00, 329.63, 261.63,
-            // F chord
-            174.61, 220.00, 261.63, 349.23, 261.63, 220.00,
-            // Em chord
-            164.81, 196.00, 246.94, 329.63, 246.94, 196.00,
-            // G7 chord
-            196.00, 246.94, 293.66, 349.23, 392.00, 493.88
+            174.61, 220.00, 261.63, 349.23, 261.63, 220.00
         ];
 
         this.initUI();
+        this.initAudioSource();
+        this.attemptImmediatePlay();
+    }
+
+    initAudioSource() {
+        if (CONFIG?.audio?.customAudioPath) {
+            this.customAudio = new Audio(CONFIG.audio.customAudioPath);
+            this.customAudio.loop = true;
+            this.customAudio.preload = "auto";
+
+            // Set start time as soon as metadata is ready
+            this.customAudio.addEventListener('loadedmetadata', () => {
+                if (this.customAudio.currentTime < this.startTime) {
+                    this.customAudio.currentTime = this.startTime;
+                }
+            });
+
+            // Loop back cleanly
+            this.customAudio.addEventListener('ended', () => {
+                this.customAudio.currentTime = this.startTime;
+                this.customAudio.play().catch(() => {});
+            });
+        }
+    }
+
+    attemptImmediatePlay() {
+        // Attempt autoplay right away
+        const tryPlay = () => {
+            if (this.isPlaying) return;
+            this.start();
+        };
+
+        // Try right now
+        tryPlay();
+
+        // If browser policies require user gesture, bind to ANY first interaction on screen
+        const events = ['click', 'touchstart', 'touchend', 'pointerdown', 'keydown', 'scroll'];
+        const onFirstGesture = () => {
+            if (!this.isPlaying) {
+                this.start();
+            }
+            events.forEach(evt => window.removeEventListener(evt, onFirstGesture));
+        };
+
+        events.forEach(evt => {
+            window.addEventListener(evt, onFirstGesture, { once: true, passive: true });
+        });
     }
 
     initContext() {
@@ -50,19 +89,11 @@ class RomanticAudioEngine {
         }
 
         if (this.btn) {
-            this.btn.addEventListener('click', () => this.togglePlay());
+            this.btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.togglePlay();
+            });
         }
-
-        // Optional first-click auto-start attempt
-        const startOnInteraction = () => {
-            if (!this.isPlaying) {
-                this.start();
-            }
-            window.removeEventListener('click', startOnInteraction);
-            window.removeEventListener('keydown', startOnInteraction);
-        };
-        window.addEventListener('click', startOnInteraction, { once: true });
-        window.addEventListener('keydown', startOnInteraction, { once: true });
     }
 
     togglePlay() {
@@ -75,20 +106,29 @@ class RomanticAudioEngine {
 
     start() {
         this.initContext();
-        this.isPlaying = true;
 
-        if (CONFIG?.audio?.customAudioPath) {
-            if (!this.customAudio) {
-                this.customAudio = new Audio(CONFIG.audio.customAudioPath);
-                this.customAudio.loop = true;
+        if (this.customAudio) {
+            if (this.customAudio.currentTime < this.startTime) {
+                try {
+                    this.customAudio.currentTime = this.startTime;
+                } catch(e) {}
             }
-            this.customAudio.play().catch(e => console.log('Audio playback info:', e));
+            const playPromise = this.customAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    this.isPlaying = true;
+                    this.updateUIState(true);
+                }).catch((err) => {
+                    // Autoplay was blocked; will wait for next touch/click
+                    this.isPlaying = false;
+                    this.updateUIState(false);
+                });
+            }
         } else if (CONFIG?.audio?.enableWebAudioSynthesizer) {
+            this.isPlaying = true;
             this.startSynthesizer();
+            this.updateUIState(true);
         }
-
-        if (this.btn) this.btn.classList.add('playing');
-        if (this.statusText) this.statusText.textContent = "Playing Romantic Melody 🎶";
     }
 
     pause() {
@@ -100,14 +140,24 @@ class RomanticAudioEngine {
             clearInterval(this.synthTimer);
             this.synthTimer = null;
         }
-        if (this.btn) this.btn.classList.remove('playing');
-        if (this.statusText) this.statusText.textContent = "Paused • Click to Play";
+        this.updateUIState(false);
+    }
+
+    updateUIState(playing) {
+        if (this.btn) {
+            if (playing) {
+                this.btn.classList.add('playing');
+            } else {
+                this.btn.classList.remove('playing');
+            }
+        }
+        if (this.statusText) {
+            this.statusText.textContent = playing ? "Playing Tujhko 🎶 (0:48)" : "Paused • Click to Play";
+        }
     }
 
     startSynthesizer() {
         if (this.synthTimer) clearInterval(this.synthTimer);
-        
-        // Play an arpeggiated note every 450ms
         this.synthTimer = setInterval(() => {
             if (!this.isPlaying) return;
             const freq = this.melody[this.noteIndex];
@@ -118,27 +168,19 @@ class RomanticAudioEngine {
 
     playSoftTone(freq, duration = 1.2) {
         if (!this.ctx || this.ctx.state !== 'running') return;
-
         try {
             const osc = this.ctx.createOscillator();
             const gain = this.ctx.createGain();
-            
             osc.type = 'sine';
             osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
-            // Gentle attack and exponential decay for dreamy electric piano vibe
             gain.gain.setValueAtTime(0.0001, this.ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.08, this.ctx.currentTime + 0.08);
             gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
-
             osc.connect(gain);
             gain.connect(this.ctx.destination);
-
             osc.start();
             osc.stop(this.ctx.currentTime + duration);
-        } catch (e) {
-            // Context not ready
-        }
+        } catch (e) {}
     }
 
     // Sound FX: Wax Seal Crackle
@@ -167,7 +209,7 @@ class RomanticAudioEngine {
     playRingBoxChime() {
         this.initContext();
         if (!this.ctx) return;
-        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+        const notes = [523.25, 659.25, 783.99, 1046.50];
         notes.forEach((freq, idx) => {
             setTimeout(() => {
                 this.playSoftTone(freq, 2.0);

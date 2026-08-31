@@ -16,9 +16,10 @@ const CONFIG = {
 
     // Audio Settings
     audio: {
-        defaultSongTitle: "Can't Help Falling in Love (Romantic Piano & Strings)",
-        customAudioPath: "", // e.g. "assets/audio/song.mp3"
-        enableWebAudioSynthesizer: true
+        defaultSongTitle: "Tujhko (Cocktail)",
+        customAudioPath: "song.mp3",
+        startTimeSeconds: 48,
+        enableWebAudioSynthesizer: false
     },
 
     // WhatsApp Notification Number (Optional: Aryan's phone number with country code, e.g. "919876543210")
