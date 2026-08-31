@@ -1,0 +1,732 @@
+/* ==========================================================================
+   PARI & ARYAN - FOREVER LOVE & PROPOSAL
+   LUXURY ROMANTIC DESIGN SYSTEM & MAIN STYLES
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,400;1,600&display=swap');
+
+:root {
+  /* Color Palette - Velvet Midnight & Rose Gold */
+  --bg-deep-space: #090714;
+  --bg-velvet: #120d24;
+  --bg-card: rgba(26, 19, 48, 0.65);
+  --bg-card-hover: rgba(40, 30, 72, 0.85);
+  --glass-border: rgba(224, 169, 109, 0.2);
+  --glass-border-strong: rgba(224, 169, 109, 0.5);
+  --glass-shine: rgba(255, 255, 255, 0.08);
+
+  /* Romantic Accents */
+  --rose-gold: #e0a96d;
+  --rose-gold-glow: rgba(224, 169, 109, 0.4);
+  --crimson-heart: #e63946;
+  --blush-pink: #f4a6b8;
+  --soft-champagne: #faebd7;
+  --gold-accent: #ffd700;
+  --purple-glow: rgba(142, 68, 173, 0.35);
+
+  /* Typography */
+  --font-script: 'Great Vibes', cursive;
+  --font-serif-title: 'Playfair Display', serif;
+  --font-editorial: 'Cormorant Garamond', serif;
+  --font-display: 'Cinzel Decorative', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-deep-space);
+  color: var(--soft-champagne);
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at 50% 15%, #1a1033 0%, var(--bg-deep-space) 80%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Canvas Background */
+#particlesCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Main Wrapper */
+.main-wrapper {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Floating Audio Player Widget */
+.floating-audio-widget {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(18, 13, 36, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.75rem 1.25rem;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--rose-gold-glow);
+  transition: var(--transition-smooth);
+}
+
+.floating-audio-widget:hover {
+  border-color: var(--rose-gold);
+  transform: translateY(-2px);
+}
+
+.music-disk-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-gold), var(--crimson-heart));
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+}
+
+.music-disk-btn.playing {
+  animation: spinSlow 8s linear infinite;
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.music-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--rose-gold);
+  letter-spacing: 0.5px;
+}
+
+.music-status {
+  font-size: 0.7rem;
+  color: rgba(250, 235, 215, 0.7);
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 1rem 3rem;
+  position: relative;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(224, 169, 109, 0.12);
+  border: 1px solid var(--glass-border-strong);
+  padding: 0.4rem 1.25rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--rose-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.hero-title-script {
+  font-family: var(--font-script);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  color: var(--blush-pink);
+  text-shadow: 0 0 30px rgba(244, 166, 184, 0.5);
+  margin-bottom: -0.5rem;
+  line-height: 1.1;
+}
+
+.hero-title-main {
+  font-family: var(--font-serif-title);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 20%, var(--rose-gold) 70%, var(--blush-pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-style: italic;
+  max-width: 680px;
+  color: rgba(250, 235, 215, 0.85);
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
+/* Relationship Live Counter */
+.counter-box-container {
+  background: rgba(22, 16, 43, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px var(--glass-shine);
+  max-width: 780px;
+  width: 100%;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.counter-box-container::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose-gold), transparent);
+}
+
+.counter-heading {
+  font-family: var(--font-serif-title);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--rose-gold);
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.time-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(35, 25, 66, 0.6);
+  border: 1px solid rgba(224, 169, 109, 0.15);
+  border-radius: 16px;
+  padding: 1rem 0.5rem;
+  transition: var(--transition-smooth);
+}
+
+.time-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--rose-gold);
+  box-shadow: 0 10px 20px var(--rose-gold-glow);
+}
+
+.time-num {
+  font-family: var(--font-serif-title);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 0.35rem;
+  text-shadow: 0 0 15px rgba(224, 169, 109, 0.5);
+}
+
+.time-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--blush-pink);
+}
+
+.hero-scroll-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--rose-gold);
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: var(--transition-smooth);
+}
+
+.hero-scroll-prompt:hover {
+  opacity: 1;
+  transform: translateY(3px);
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid var(--rose-gold);
+  border-radius: 15px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--rose-gold);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheel 2s infinite;
+}
+
+/* ==========================================================================
+   SECTION HEADERS
+   ========================================================================== */
+.section-wrapper {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-script-tag {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--blush-pink);
+  margin-bottom: -0.5rem;
+  display: block;
+}
+
+.section-title {
+  font-family: var(--font-serif-title);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.section-desc {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  color: rgba(250, 235, 215, 0.75);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+/* ==========================================================================
+   TIMELINE (CELESTIAL JOURNEY)
+   ========================================================================== */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: linear-gradient(180deg, transparent, var(--rose-gold), var(--crimson-heart), var(--rose-gold), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1.5rem 2.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-node {
+  position: absolute;
+  top: 2.2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--rose-gold) 0%, #3e1b4f 100%);
+  border: 3px solid var(--bg-deep-space);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  z-index: 5;
+  box-shadow: 0 0 20px var(--rose-gold-glow);
+  transition: var(--transition-smooth);
+}
+
+.timeline-item:nth-child(odd) .timeline-node {
+  right: -22px;
+}
+
+.timeline-item:nth-child(even) .timeline-node {
+  left: -22px;
+}
+
+.timeline-item:hover .timeline-node {
+  transform: scale(1.15) rotate(15deg);
+  box-shadow: 0 0 30px var(--crimson-heart);
+}
+
+.timeline-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 1.75rem;
+  transition: var(--transition-smooth);
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-card:hover {
+  border-color: var(--glass-border-strong);
+  background: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 20px var(--rose-gold-glow);
+}
+
+.timeline-tag {
+  display: inline-block;
+  padding: 0.25rem 0.85rem;
+  background: rgba(224, 169, 109, 0.15);
+  border-radius: 12px;
+  color: var(--rose-gold);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.75rem;
+}
+
+.timeline-item-title {
+  font-family: var(--font-serif-title);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.timeline-item-date {
+  font-size: 0.85rem;
+  color: var(--blush-pink);
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.timeline-item-story {
+  font-family: var(--font-editorial);
+  font-size: 1.1rem;
+  color: rgba(250, 235, 215, 0.85);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   POLAROID MEMORY LANE
+   ========================================================================== */
+.polaroids-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 1rem 0;
+}
+
+.polaroid-card {
+  background: #ffffff;
+  padding: 1rem 1rem 1.5rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 2px 10px rgba(0,0,0,0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  cursor: pointer;
+  color: #222;
+}
+
+.polaroid-card:hover {
+  z-index: 10;
+  box-shadow: 0 25px 50px rgba(224, 169, 109, 0.3), 0 0 25px rgba(255, 255, 255, 0.2);
+}
+
+.polaroid-card:nth-child(odd) {
+  transform: rotate(-2deg);
+}
+
+.polaroid-card:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.polaroid-card:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.polaroid-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: rgba(240, 230, 210, 0.65);
+  backdrop-filter: blur(4px);
+  border: 1px dashed rgba(180, 160, 130, 0.5);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.polaroid-img-wrapper {
+  width: 100%;
+  height: 250px;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  background: #2b1b3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.polaroid-card:hover .polaroid-img {
+  transform: scale(1.06);
+}
+
+.polaroid-caption-area {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.polaroid-title {
+  font-family: var(--font-script);
+  font-size: 1.8rem;
+  color: #1e112a;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.polaroid-caption {
+  font-family: var(--font-editorial);
+  font-size: 0.95rem;
+  color: #4a3e56;
+  font-style: italic;
+  line-height: 1.3;
+}
+
+.polaroid-date-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--crimson-heart);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 0.4rem;
+}
+
+/* ==========================================================================
+   REASONS WHY I LOVE YOU DECK
+   ========================================================================== */
+.reasons-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.reasons-magic-card {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(35, 25, 66, 0.9), rgba(18, 13, 36, 0.95));
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 28px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px var(--rose-gold-glow);
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.reason-heart-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  animation: heartPulse 1.8s ease-in-out infinite;
+}
+
+.reason-number {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rose-gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.reason-text {
+  font-family: var(--font-editorial);
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1.5;
+  transition: opacity 0.3s ease;
+}
+
+.reasons-action-btn {
+  background: linear-gradient(135deg, var(--rose-gold), var(--crimson-heart));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2.5rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.reasons-action-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(230, 57, 70, 0.6);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+.site-footer {
+  text-align: center;
+  padding: 4rem 1rem 3rem;
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid rgba(224, 169, 109, 0.15);
+  margin-top: 5rem;
+}
+
+.footer-script {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--blush-pink);
+  margin-bottom: 0.5rem;
+}
+
+.footer-text {
+  font-size: 0.9rem;
+  color: rgba(250, 235, 215, 0.6);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .timeline-container::before {
+    left: 20px;
+  }
+  
+  .timeline-item {
+    width: 100%;
+    padding-left: 55px;
+    padding-right: 15px;
+    text-align: left !important;
+  }
+  
+  .timeline-item:nth-child(even) {
+    left: 0;
+  }
+  
+  .timeline-node {
+    left: -2px !important;
+    right: auto !important;
+  }
+
+  .floating-audio-widget {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}

@@ -1,0 +1,477 @@
+/* ==========================================================================
+   INTERACTIVE SPECIAL FEATURES:
+   1. Draggable Love Papers & Polaroid Physics
+   2. Signature Unfolding Envelope with Multi-Notes
+   3. "I LOVE YOU" Heartbeat Lock Transformer
+   4. 3D Flip Proposal Card
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=Shadows+Into+Light&family=Short+Stack&family=Sofia&family=Zeyada&display=swap');
+
+/* ==========================================================================
+   1. DRAGGABLE PAPERS ARENA
+   ========================================================================== */
+.draggable-arena-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  background: rgba(18, 13, 34, 0.6);
+  border: 1px dashed var(--glass-border-strong);
+  border-radius: 28px;
+  margin: 3rem 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.draggable-instruction-banner {
+  position: absolute;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(224, 169, 109, 0.15);
+  border: 1px solid var(--rose-gold);
+  color: var(--soft-champagne);
+  padding: 0.4rem 1.2rem;
+  border-radius: 30px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.draggable-paper {
+  position: absolute;
+  background: #fbf7ee;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 16px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0,0,0,0.3);
+  padding: 1.2rem 1.6rem;
+  border-radius: 8px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+  max-width: 260px;
+  transition: box-shadow 0.2s ease;
+}
+
+.draggable-paper:active {
+  cursor: grabbing;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px var(--rose-gold-glow);
+}
+
+.draggable-paper p {
+  font-family: 'Zeyada', cursive;
+  font-size: 1.9rem;
+  color: #1a2250;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.draggable-paper.heart-sticker {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, #ff4d6d, #b3002d);
+  color: #fff;
+  padding: 0;
+}
+
+.draggable-paper.heart-sticker span {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+.draggable-paper.photo-card {
+  padding: 0.8rem 0.8rem 1.4rem 0.8rem;
+  text-align: center;
+  max-width: 240px;
+}
+
+.draggable-paper.photo-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+  pointer-events: none;
+}
+
+.draggable-paper.photo-card .photo-text {
+  font-family: 'Homemade Apple', cursive;
+  font-size: 1rem;
+  color: #4a3e56;
+}
+
+/* ==========================================================================
+   2. SPECIAL MULTI-LAYER UNFOLDING ENVELOPE (CodePen Inspired)
+   ========================================================================== */
+.interactive-envelope-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  position: relative;
+}
+
+.interactive-unfold-envelop {
+  width: 320px;
+  height: 220px;
+  position: relative;
+  margin: 2rem auto;
+}
+
+.envelop__front-paper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  border-radius: 12px;
+  border: 4px solid #856142;
+  background-color: #ba9872;
+  clip-path: polygon(100% 0%, 50% 70%, 0% 0%, 0% 100%, 100% 100%);
+  z-index: 30;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+.envelop__back-paper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  border-radius: 12px;
+  background-color: #704f33;
+  clip-path: polygon(0% 0%, 100% 0%, 90% 100%, 0% 90%);
+  z-index: 10;
+}
+
+.envelop__up-paper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background-color: #856142;
+  z-index: 40;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 81%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), clip-path 0.6s ease;
+  transform-origin: top;
+  cursor: pointer;
+}
+
+.envelop__up-paper.opened {
+  transform: rotateX(180deg);
+  z-index: 5;
+  clip-path: polygon(0% 0%, 100% 0%, 50% 61%);
+}
+
+.envelop__sticker {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e63946, #990022);
+  border: 3px solid #f9f9f9;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+}
+
+.envelop__sticker span {
+  font-size: 1.5rem;
+}
+
+.envelop__sticker:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.envelop__sticker.broken {
+  transform: translate(-120%, -50%) scale(0.7) rotate(-30deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.envelop__content {
+  position: absolute;
+  width: 90%;
+  left: 5%;
+  bottom: 0;
+  height: 90%;
+  z-index: 20;
+  transition: height 0.6s ease;
+}
+
+.interactive-unfold-envelop.content-active .envelop__content {
+  height: 140%;
+}
+
+.interactive-love-notes {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide-note {
+  width: 94%;
+  background: #fbfbf9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: absolute;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  height: 48px;
+}
+
+.slide-note:nth-child(1) { bottom: 65%; }
+.slide-note:nth-child(2) { bottom: 40%; }
+.slide-note:nth-child(3) { bottom: 15%; }
+
+.slide-note:hover {
+  transform: translateY(-5px);
+  background: #ffffff;
+}
+
+.slide-note.active {
+  height: 150px;
+  z-index: 35;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 15px var(--rose-gold-glow);
+  transform: translateY(-20px);
+}
+
+.slide-note p {
+  font-family: 'Sofia', cursive;
+  font-size: 1.05rem;
+  color: #2b1a38;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   3. "I LOVE YOU" HEARTBEAT LOCK (CodePen Inspired)
+   ========================================================================== */
+.heart-lock-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.heart-lock-wrapper {
+  width: 320px;
+  height: 320px;
+  position: relative;
+  margin: 1.5rem auto;
+  font-family: 'Shadows Into Light', cursive;
+}
+
+.heart-lock-wrapper.throb {
+  animation: heartThrob 0.6s infinite ease-in-out;
+}
+
+@keyframes heartThrob {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.15); }
+  85% { transform: scale(1); }
+}
+
+.heart-lock-input {
+  display: none;
+}
+
+.heart-lock-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  font-size: 3.5rem;
+  color: var(--soft-champagne);
+  cursor: pointer;
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+  font-weight: 700;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.heart-lock-label:hover {
+  color: #ff4d6d;
+}
+
+#lbl1 {
+  top: 15px;
+  left: 20px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+#lbl2 {
+  top: 15px;
+  right: 20px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+#lbl3 {
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 90px;
+}
+
+/* Checked States Forming Big Solid Heart */
+#ck1:checked + #lbl1,
+#ck2:checked + #lbl2,
+#ck3:checked + #lbl3 {
+  background: #e63946;
+  font-size: 0;
+  color: transparent;
+  box-shadow: 0 0 25px rgba(230, 57, 70, 0.8);
+}
+
+#ck1:checked + #lbl1 {
+  width: 175px;
+  height: 175px;
+  top: 10px;
+  left: 5px;
+  border-radius: 50%;
+}
+
+#ck2:checked + #lbl2 {
+  width: 175px;
+  height: 175px;
+  top: 10px;
+  right: 5px;
+  border-radius: 50%;
+}
+
+#ck3:checked + #lbl3 {
+  width: 160px;
+  height: 160px;
+  bottom: 45px;
+  left: 80px;
+  transform: rotate(45deg);
+  border-radius: 0;
+}
+
+.heart-unlock-status {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--rose-gold);
+  margin-top: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.heart-unlock-status.unlocked {
+  color: var(--gold-accent);
+  font-size: 1.15rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+/* ==========================================================================
+   4. 3D FLIP PROPOSAL / LOVE GREETING CARD (CodePen Inspired)
+   ========================================================================== */
+.flip-card-wrapper {
+  perspective: 1200px;
+  width: 280px;
+  height: 380px;
+  margin: 2rem auto;
+  position: relative;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+  border-radius: 12px;
+}
+
+.flip-card-wrapper:hover .flip-card-inner,
+.flip-card-wrapper.flipped .flip-card-inner {
+  transform: rotateY(-160deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.flip-card-front {
+  background: linear-gradient(135deg, #24143a, #3e1b52);
+  border: 2px solid var(--rose-gold);
+  color: #ffffff;
+}
+
+.flip-card-front h3 {
+  font-family: var(--font-serif-title);
+  font-size: 1.6rem;
+  color: var(--blush-pink);
+  margin-top: 1rem;
+}
+
+.flip-card-front p {
+  font-family: var(--font-editorial);
+  font-size: 1.1rem;
+  color: var(--soft-champagne);
+  margin-top: 0.5rem;
+}
+
+.flip-card-back {
+  background: #fdfaf3;
+  color: #1e112a;
+  transform: rotateY(180deg);
+  border: 2px solid var(--gold-accent);
+  box-shadow: inset 0 0 20px rgba(220, 180, 130, 0.3);
+}
+
+.flip-card-back h4 {
+  font-family: var(--font-script);
+  font-size: 2.3rem;
+  color: var(--crimson-heart);
+  margin-bottom: 0.5rem;
+}
+
+.flip-card-back p {
+  font-family: 'Homemade Apple', cursive;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #2b1f1d;
+}

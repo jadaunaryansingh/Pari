@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Pari — Our Love Story & Forever Promise 💍</title>
+    <meta name="description" content="A digital sanctuary of love letters, cherished memories, interactive notes, and an official marriage proposal from Aryan to Pari.">
+    
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/letters.css">
+    <link rel="stylesheet" href="css/proposal.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/interactive-features.css">
+    <link rel="stylesheet" href="css/gallery.css">
+</head>
+<body>
+
+    <!-- Ambient Canvas for Stars, Drifting Hearts & Celebration Fireworks -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- Floating Audio Player Widget -->
+    <div class="floating-audio-widget" id="floatingAudioWidget" title="Click to toggle romantic music">
+        <button class="music-disk-btn" id="musicToggleBtn" aria-label="Toggle Romantic Music">
+            <span>🎵</span>
+        </button>
+        <div class="music-info">
+            <span class="music-title" id="musicTitleText">Can't Help Falling in Love</span>
+            <span class="music-status" id="musicStatusText">Click to Play Melody 🎶</span>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-wrapper">
+
+        <!-- =================================================================
+             HERO SECTION: WELCOME & RELATIONSHIP LIVE COUNTER
+             ================================================================= -->
+        <header class="hero-section">
+            <div class="hero-pill-badge">
+                <span>✨</span> Our Infinite Story <span>✨</span>
+            </div>
+
+            <div class="hero-title-script">To My Sweetest</div>
+            <h1 class="hero-title-main">Pari & Aryan</h1>
+
+            <p class="hero-subtitle">
+                "From that very first glance across the classroom to every quiet 3 AM call, every heartbeat has led me straight to you."
+            </p>
+
+            <!-- Relationship Live Counter -->
+            <div class="counter-box-container reveal-fade-up">
+                <div class="counter-heading">
+                    <span>⏳</span> Falling In Love With You Every Single Second
+                </div>
+                <div class="countdown-grid">
+                    <div class="time-card">
+                        <span class="time-num" id="countDays">00</span>
+                        <span class="time-label">Days</span>
+                    </div>
+                    <div class="time-card">
+                        <span class="time-num" id="countHours">00</span>
+                        <span class="time-label">Hours</span>
+                    </div>
+                    <div class="time-card">
+                        <span class="time-num" id="countMins">00</span>
+                        <span class="time-label">Minutes</span>
+                    </div>
+                    <div class="time-card">
+                        <span class="time-num" id="countSecs">00</span>
+                        <span class="time-label">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-scroll-prompt" id="heroScrollPrompt">
+                <span>Scroll Into Our Story</span>
+                <div class="scroll-mouse">
+                    <div class="scroll-wheel"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- =================================================================
+             SECTION 1: OUR CELESTIAL JOURNEY (TIMELINE)
+             ================================================================= -->
+        <section class="section-wrapper" id="journeySection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">How It All Began</span>
+                <h2 class="section-title">Our Celestial Journey</h2>
+                <p class="section-desc">Every serendipitous coincidence, every shared laugh, and every milestone that made you my universe.</p>
+            </div>
+
+            <div class="timeline-container" id="timelineContainer">
+                <!-- Milestones populated dynamically via js/timeline.js -->
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 2: DRAGGABLE LOVE PAPERS & MEMORIES PLAYGROUND (CodePen Style)
+             ================================================================= -->
+        <section class="section-wrapper" id="draggableSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">Interactive Love Notes</span>
+                <h2 class="section-title">Scattered Thoughts & Memories</h2>
+                <p class="section-desc">Drag and toss the papers around! Uncover our favorite memories, inside jokes, and little love notes.</p>
+            </div>
+
+            <div class="draggable-arena-wrapper" id="draggableArena">
+                <div class="draggable-instruction-banner">✨ Drag & Move the Notes Around ✨</div>
+
+                <!-- Draggable Heart -->
+                <div class="draggable-paper heart-sticker" style="top: 25%; left: 45%;">
+                    <span>❤️</span>
+                </div>
+
+                <!-- Draggable Note 1 (Real Photo) -->
+                <div class="draggable-paper photo-card" style="top: 10%; left: 12%;">
+                    <img src="photos/WhatsApp Image 2026-09-01 at 1.30.09 AM.jpeg" alt="First spark" />
+                    <div class="photo-text">"Yaar sexy girl hai... 😍"</div>
+                </div>
+
+                <!-- Draggable Note 2 (Real Photo) -->
+                <div class="draggable-paper photo-card" style="top: 45%; left: 20%;">
+                    <img src="photos/WhatsApp Image 2026-09-01 at 1.30.18 AM.jpeg" alt="Barsana ride" />
+                    <div class="photo-text">Barsana bike ride with my baby 🏍️</div>
+                </div>
+
+                <!-- Draggable Note 3 (Real Photo - Toto) -->
+                <div class="draggable-paper photo-card" style="top: 15%; right: 15%;">
+                    <img src="photos/WhatsApp Image 2026-09-01 at 1.30.20 AM.jpeg" alt="Toto Haramkhor" />
+                    <div class="photo-text">Toto (Haramkhor) & Our Balak Date 🧸❤️</div>
+                </div>
+
+                <!-- Draggable Note 4 (Real Photo - Cha Maska) -->
+                <div class="draggable-paper photo-card" style="bottom: 8%; right: 25%;">
+                    <img src="photos/WhatsApp Image 2026-09-01 at 1.30.25 AM.jpeg" alt="First kiss" />
+                    <div class="photo-text">Cha Maska first kiss sensation... 💋✨</div>
+                </div>
+
+                <!-- Draggable Note 5 -->
+                <div class="draggable-paper" style="bottom: 12%; left: 42%;">
+                    <p>You are my most person forever ❤️</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 3: SPECIAL MULTI-LAYER UNFOLDING ENVELOPE (CodePen Style)
+             ================================================================= -->
+        <section class="section-wrapper" id="interactiveEnvelopeSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">An Interactive Secret</span>
+                <h2 class="section-title">The Sealed Heart Envelope</h2>
+                <p class="section-desc">Click the heart sticker to break the seal, open the flap, and pull out each layer of love notes.</p>
+            </div>
+
+            <div class="interactive-envelope-section reveal-fade-up">
+                <div class="interactive-unfold-envelop">
+                    <div class="envelop__front-paper"></div>
+                    <div class="envelop__back-paper"></div>
+                    <div class="envelop__up-paper js-interactive-up-paper"></div>
+                    <div class="envelop__sticker js-interactive-sticker" title="Click to break sticker seal!">
+                        <span>💌</span>
+                    </div>
+                    <div class="envelop__content">
+                        <div class="interactive-love-notes">
+                            <div class="slide-note js-slide-note">
+                                <p>To my princess Pari, every single morning I wake up knowing I have you by my side is pure magic. ✨</p>
+                            </div>
+                            <div class="slide-note js-slide-note">
+                                <p>From our 3 AM calls to Krishna's birthday and Spandhan, you became the center of my universe. 🌸</p>
+                            </div>
+                            <div class="slide-note js-slide-note">
+                                <p>You are the best thing that ever happened to me. Thank you for choosing me every single day. I love you! ❤️</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 4: THE VAULT OF LOVE LETTERS (WAX-SEALED ENVELOPES)
+             ================================================================= -->
+        <section class="section-wrapper" id="lettersSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">From My Soul To Yours</span>
+                <h2 class="section-title">The Vault of 4 Love Letters</h2>
+                <p class="section-desc">Click on each wax-sealed envelope to unseal and read the deepest words I have written just for you.</p>
+            </div>
+
+            <div class="letters-grid" id="lettersGrid">
+                <!-- 4 Envelopes rendered dynamically via js/letters.js -->
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 5: 3D FLIPPING GREETING CARD (CodePen Style)
+             ================================================================= -->
+        <section class="section-wrapper" id="flipCardSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">Touch To Open</span>
+                <h2 class="section-title">A Special Keepsake Card</h2>
+                <p class="section-desc">Hover or tap the card below to flip it open and read the handwritten vow inside.</p>
+            </div>
+
+            <div class="flip-card-wrapper reveal-fade-up">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <span style="font-size: 3.5rem;">💌🌹</span>
+                        <h3>For Pari</h3>
+                        <p>Hover or Tap to Open ✨</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <h4>Forever Yours</h4>
+                        <p>"In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."</p>
+                        <p style="margin-top: 1rem; color: #b3002d; font-weight: bold;">— Aryan ❤️</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 6: POLAROID MEMORY LANE & PHOTO REEL
+             ================================================================= -->
+        <section class="section-wrapper" id="memoriesSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">Captured in My Heart</span>
+                <h2 class="section-title">Polaroid Memory Lane</h2>
+                <p class="section-desc">Little snapshots of heaven with you, from Barsana to Toto and our electric first kiss.</p>
+            </div>
+
+            <div class="polaroids-grid" id="polaroidsGrid">
+                <!-- Polaroid cards rendered dynamically via js/polaroids.js -->
+            </div>
+
+            <!-- Extended Photo Wall Reel -->
+            <div class="section-header reveal-fade-up" style="margin-top: 4rem; margin-bottom: 2rem;">
+                <span class="section-script-tag">Every Smile, Every Glance</span>
+                <h3 class="section-title" style="font-size: 2.2rem;">Our Infinite Memory Wall</h3>
+                <p class="section-desc">Click any photo to relive that moment full-screen ✨</p>
+            </div>
+
+            <div class="photo-reel-grid reveal-fade-up" id="photoReelGrid">
+                <!-- Additional photos rendered dynamically via js/polaroids.js -->
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 7: REASONS WHY I LOVE YOU DECK
+             ================================================================= -->
+        <section class="section-wrapper" id="reasonsSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">Infinite Little Things</span>
+                <h2 class="section-title">Why Pari Is My Universe</h2>
+                <p class="section-desc">Just a few of the countless reasons my soul fell hopelessly in love with you.</p>
+            </div>
+
+            <div class="reasons-container reveal-fade-up">
+                <div class="reasons-magic-card">
+                    <div class="reason-heart-icon">💖</div>
+                    <div class="reason-number" id="reasonNumber">Reason #1 of 20</div>
+                    <div class="reason-text" id="reasonText">Loading sweet thoughts...</div>
+                </div>
+                <button class="reasons-action-btn" id="nextReasonBtn">
+                    <span>Another Reason I Love You</span> <span>✨➔</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 8: "I LOVE YOU" HEARTBEAT LOCK (CodePen Style)
+             ================================================================= -->
+        <section class="section-wrapper" id="heartLockSection">
+            <div class="section-header reveal-fade-up">
+                <span class="section-script-tag">The Key To My Heart</span>
+                <h2 class="section-title">Complete Our Beating Heart</h2>
+                <p class="section-desc">Click on the three words below to form our heart and unlock the final question.</p>
+            </div>
+
+            <div class="heart-lock-section reveal-fade-up">
+                <div class="heart-lock-wrapper" id="heartLockWrapper">
+                    <input type="checkbox" id="ck1" class="heart-lock-input">
+                    <label for="ck1" class="heart-lock-label" id="lbl1">I</label>
+
+                    <input type="checkbox" id="ck2" class="heart-lock-input">
+                    <label for="ck2" class="heart-lock-label" id="lbl2">Love</label>
+
+                    <input type="checkbox" id="ck3" class="heart-lock-input">
+                    <label for="ck3" class="heart-lock-label" id="lbl3">You</label>
+                </div>
+                <div class="heart-unlock-status" id="heartUnlockMessage">
+                    (Click on the words 'I', 'Love', 'You' to complete our heart)
+                </div>
+            </div>
+        </section>
+
+        <!-- =================================================================
+             SECTION 9: THE GRAND PROPOSAL SANCTUARY
+             ================================================================= -->
+        <section class="section-wrapper" id="proposalSection">
+            <div class="proposal-arena reveal-fade-up">
+                
+                <!-- 3D Velvet Jewelry Ring Box -->
+                <div class="ring-stage" id="ringStage" title="Tap to open the ring box!">
+                    <div class="ring-box" id="ringBox">
+                        <!-- Lid -->
+                        <div class="ring-box-lid">
+                            <span class="lid-ribbon">🎀</span>
+                        </div>
+                        
+                        <!-- Base -->
+                        <div class="ring-box-base">
+                            <div class="velvet-cushion">
+                                <div class="ring-slot"></div>
+                                <!-- The Sparkling Diamond Ring -->
+                                <div class="sparkling-ring">
+                                    <div class="diamond-gem"></div>
+                                    <div class="gold-band"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-instruction">✨ Tap to Open the Velvet Box ✨</div>
+                </div>
+
+                <!-- Heartfelt Speech & The Big Question -->
+                <div class="proposal-message-container">
+                    <div class="proposal-heading" id="proposalHeading">Pari, My Soul, My Everything...</div>
+                    
+                    <div class="proposal-speech" id="proposalSpeech">
+                        <!-- Populated dynamically via config.js -->
+                    </div>
+
+                    <div class="proposal-question-highlight" id="proposalQuestion">
+                        Pari, will you marry me and make me the happiest man in the universe?
+                    </div>
+
+                    <!-- Action Buttons: Grand YES & Playful Runaway NO -->
+                    <div class="proposal-actions-area">
+                        <button class="btn-proposal-yes" id="btnProposalYes">
+                            <span>💍</span> YES! A Thousand Times YES! ❤️
+                        </button>
+                        <button class="btn-proposal-no" id="btnProposalNo">
+                            No... 😜
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-script">Aryan & Pari</div>
+            <p class="footer-text">Built with eternal love for my future wife • Forever & Always</p>
+        </footer>
+
+    </div>
+
+    <!-- =================================================================
+         MODALS & OVERLAYS
+         ================================================================= -->
+
+    <!-- Letter Reading Parchment Modal -->
+    <div class="letter-modal-overlay" id="letterModal">
+        <div class="parchment-container">
+            <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close Letter">✕</button>
+            <div class="modal-chapter" id="modalChapter">Chapter I</div>
+            <h2 class="modal-letter-title" id="modalTitle">Letter Title</h2>
+            <div class="modal-letter-subtitle" id="modalSubtitle">Subtitle</div>
+            <div class="modal-letter-content" id="modalContent"></div>
+            <div class="modal-letter-footer" id="modalFooter">Forever Yours, Aryan ❤️</div>
+        </div>
+    </div>
+
+    <!-- Playful Toast for No Button -->
+    <div class="playful-toast" id="playfulToast">
+        Nice try sweetheart! But you're stuck with me forever! ❤️
+    </div>
+
+    <!-- Fullscreen Memory Lightbox Modal -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content-wrapper">
+            <button class="lightbox-close-btn" id="lightboxCloseBtn" aria-label="Close Lightbox">✕</button>
+            <img class="lightbox-img" id="lightboxImg" src="" alt="Full size memory" />
+        </div>
+    </div>
+
+    <!-- Celebration & Engagement Keepsake Decree Modal -->
+    <div class="celebration-modal" id="celebrationModal">
+        <div class="keepsake-certificate-card">
+            <div class="keepsake-badge">💍✨🥂</div>
+            <div class="keepsake-title">OFFICIAL ENGAGEMENT DECREE</div>
+            <div class="keepsake-she-said-yes">She Said YES!</div>
+            
+            <div class="keepsake-names-union">
+                <span>Aryan</span>
+                <span class="union-heart">❤️</span>
+                <span>Pari</span>
+            </div>
+
+            <p class="keepsake-text">
+                "On this magical day, Pari accepted Aryan's proposal to be together through every adventure, every sunrise, and all the years to come. Two souls forever united."
+            </p>
+
+            <div class="keepsake-actions">
+                <a href="#" class="btn-whatsapp-share" id="btnWhatsappShare">
+                    <span>💬</span> Tell Aryan "I Said YES!" on WhatsApp
+                </a>
+                <button class="btn-close-keepsake" id="closeCelebrationBtn">
+                    Close Keepsake
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="config.js"></script>
+    <script type="module" src="js/particles.js"></script>
+    <script type="module" src="js/audio.js"></script>
+    <script type="module" src="js/letters.js"></script>
+    <script type="module" src="js/timeline.js"></script>
+    <script type="module" src="js/polaroids.js"></script>
+    <script type="module" src="js/reasons.js"></script>
+    <script type="module" src="js/draggable.js"></script>
+    <script type="module" src="js/envelope-interactive.js"></script>
+    <script type="module" src="js/proposal.js"></script>
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

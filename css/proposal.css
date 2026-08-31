@@ -1,0 +1,480 @@
+/* ==========================================================================
+   THE GRAND PROPOSAL SANCTUARY & 3D RING BOX
+   Spotlight Atmosphere, Diamond Sparkle, Playful No Button & Celebration Modal
+   ========================================================================== */
+
+.proposal-arena {
+  position: relative;
+  background: radial-gradient(circle at 50% 40%, rgba(58, 26, 77, 0.45) 0%, rgba(9, 7, 20, 0.95) 75%);
+  border: 1px solid var(--glass-border-strong);
+  border-radius: 36px;
+  padding: 5rem 2rem 4rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 50px rgba(224, 169, 109, 0.2);
+  text-align: center;
+  overflow: hidden;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* Spotlight Cone Effect */
+.proposal-arena::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 600px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 230, 180, 0.18) 0%, rgba(255, 230, 180, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 3D Velvet Ring Box Stage */
+.ring-stage {
+  perspective: 1000px;
+  margin: 2.5rem auto 3.5rem;
+  width: 220px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.ring-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ring-box-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 90px;
+  background: linear-gradient(135deg, #1b0a2a, #4a154b, #1b0a2a);
+  border-radius: 20px 20px 30px 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 3px 6px rgba(255, 255, 255, 0.2), inset 0 -4px 10px rgba(0, 0, 0, 0.6);
+  border: 2px solid #6b286c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Velvet Cushion inside */
+.velvet-cushion {
+  width: 130px;
+  height: 65px;
+  background: radial-gradient(ellipse at center, #2e0836 0%, #15001a 100%);
+  border-radius: 14px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cushion Ring Slot */
+.ring-slot {
+  width: 60px;
+  height: 8px;
+  background: #0d0012;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px #000;
+  position: absolute;
+}
+
+/* Sparkling Diamond Ring */
+.sparkling-ring {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+  z-index: 10;
+}
+
+.ring-box.open .sparkling-ring {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-25px) scale(1.15);
+}
+
+.diamond-gem {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #ffffff 0%, #d4f1f9 40%, #89d4e7 70%, #ffffff 100%);
+  clip-path: polygon(50% 0%, 85% 30%, 100% 60%, 50% 100%, 0% 60%, 15% 30%);
+  box-shadow: 0 0 25px #ffffff, 0 0 50px rgba(137, 212, 231, 0.9);
+  animation: diamondShine 2.5s ease-in-out infinite alternate;
+  position: relative;
+}
+
+.diamond-gem::after {
+  content: '✨';
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  font-size: 1.1rem;
+  animation: sparkleGlint 1.5s infinite;
+}
+
+.gold-band {
+  width: 48px;
+  height: 48px;
+  border: 6px solid #e0a96d;
+  border-top-color: #ffd700;
+  border-radius: 50%;
+  margin-top: -16px;
+  box-shadow: 0 0 15px rgba(224, 169, 109, 0.6), inset 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+/* Ring Box Lid */
+.ring-box-lid {
+  position: absolute;
+  top: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 85px;
+  background: linear-gradient(135deg, #3d1445, #1b0a2a);
+  border-radius: 28px 28px 10px 10px;
+  border: 2px solid #752976;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4), inset 0 3px 6px rgba(255, 255, 255, 0.2);
+  transform-origin: top center;
+  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lid-ribbon {
+  width: 32px;
+  height: 32px;
+  color: var(--rose-gold);
+  font-size: 1.5rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.ring-box.open .ring-box-lid {
+  transform: translateX(-50%) rotateX(-125deg) translateY(-20px);
+}
+
+.box-instruction {
+  font-size: 0.9rem;
+  color: var(--rose-gold);
+  margin-top: 1rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  animation: pulseLight 2s infinite;
+}
+
+/* Proposal Message Area */
+.proposal-message-container {
+  max-width: 750px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+}
+
+.proposal-heading {
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  color: var(--blush-pink);
+  text-shadow: 0 0 25px rgba(244, 166, 184, 0.6);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.proposal-speech {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.25rem, 2.5vw, 1.55rem);
+  line-height: 1.8;
+  color: #faebd7;
+  margin-bottom: 2.5rem;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.proposal-speech p {
+  margin-bottom: 1.2rem;
+}
+
+.proposal-question-highlight {
+  font-family: var(--font-serif-title);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, var(--gold-accent) 50%, var(--rose-gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Interactive Action Buttons */
+.proposal-actions-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  position: relative;
+  min-height: 100px;
+  flex-wrap: wrap;
+}
+
+/* The Grand YES Button */
+.btn-proposal-yes {
+  background: linear-gradient(135deg, #ff2a6d 0%, #e63946 50%, #b3002d 100%);
+  color: #ffffff;
+  border: none;
+  padding: 1.4rem 3.5rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: 
+    0 10px 30px rgba(230, 57, 70, 0.6),
+    0 0 40px rgba(255, 42, 109, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.btn-proposal-yes::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 50%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(30deg);
+  animation: shineStreak 3s infinite ease-in-out;
+}
+
+.btn-proposal-yes:hover {
+  transform: scale(1.1) translateY(-4px);
+  box-shadow: 
+    0 15px 45px rgba(230, 57, 70, 0.8),
+    0 0 60px rgba(255, 42, 109, 0.7);
+}
+
+/* The Playful Runaway No Button */
+.btn-proposal-no {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(250, 235, 215, 0.7);
+  padding: 1rem 2.2rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  z-index: 9;
+}
+
+.btn-proposal-no:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* Cute Floating Toast for No clicks */
+.playful-toast {
+  position: fixed;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(22, 16, 43, 0.95);
+  border: 1px solid var(--rose-gold);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--rose-gold-glow);
+  padding: 1rem 2rem;
+  border-radius: 40px;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  z-index: 10001;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s ease;
+}
+
+.playful-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ==========================================================================
+   CELEBRATION & ENGAGEMENT KEEPSAKE MODAL
+   ========================================================================== */
+.celebration-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 4, 18, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.celebration-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.keepsake-certificate-card {
+  background: radial-gradient(circle at 50% 10%, #291a3f 0%, #12091f 100%);
+  border: 2px solid var(--gold-accent);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  max-width: 680px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.9), 0 0 60px rgba(255, 215, 0, 0.3), inset 0 0 30px rgba(224, 169, 109, 0.15);
+  transform: scale(0.9);
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.celebration-modal.active .keepsake-certificate-card {
+  transform: scale(1);
+}
+
+.keepsake-certificate-card::before {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed rgba(224, 169, 109, 0.4);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.keepsake-badge {
+  font-size: 3.5rem;
+  margin-bottom: 0.75rem;
+  animation: heartPulse 1.5s infinite;
+}
+
+.keepsake-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  color: var(--gold-accent);
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.keepsake-she-said-yes {
+  font-family: var(--font-script);
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  color: var(--blush-pink);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 25px rgba(244, 166, 184, 0.6);
+}
+
+.keepsake-names-union {
+  font-family: var(--font-serif-title);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.union-heart {
+  color: var(--crimson-heart);
+  animation: heartPulse 1.2s infinite;
+}
+
+.keepsake-text {
+  font-family: var(--font-editorial);
+  font-size: 1.35rem;
+  color: rgba(250, 235, 215, 0.9);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+.keepsake-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-whatsapp-share {
+  background: #25d366;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-whatsapp-share:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+}
+
+.btn-close-keepsake {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  color: var(--soft-champagne);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-close-keepsake:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
